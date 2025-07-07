@@ -1,0 +1,21 @@
+body{
+ background-color:lab(71.46% 13.92 5.26); 
+ color: black;  
+}
+
+.jumbo-color{
+    background-color: rgb(83,81,81);
+}
+.errorlist{
+            list-style-type: none;
+            color: red;
+            margin: 0;
+            padding: 0;
+            size: 10px;
+}
+.message.success{
+            color: green;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+}

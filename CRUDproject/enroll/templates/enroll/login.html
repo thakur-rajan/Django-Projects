@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'enroll/css/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">    
+</head>
+<body>
+     <form action="" method="POST" novalidate >
+        {%csrf_token%}
+        {% for field in form %}
+        <p>
+
+        
+          {{field.label_tag}} {{field}} 
+          <span class="errorlist"> {{field.errors|striptags}} </span><br>
+        {% endfor %}
+        </p>
+        <input type="submit" class="btn btn-info" value="Login">
+        <a href="{% url 'AddandShow' %}"><b class="btn btn-success">Back to home</b></a>
+     </form>
+         {% if messages %}
+          {% for message in messages  %}
+          <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+            <div class="col-sm-12 d-flex align-items-center">
+
+               <span >  
+                <h4 class="text-center alert alert-light" {%if message.tags%} class="{{message.tags}}" {% endif %}>
+                {{message}}
+                </h4>                
+               </span>                    
+            </div>
+          </div>
+
+          {% endfor %}
+        {% endif %}  
+    </div>
+    <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
+    <script src="{% static 'enroll/js/jquery.js' %}"></script>
+    <script src="{% static 'enroll/js/proper.js' %}"></script>        
+</body>
+</html>

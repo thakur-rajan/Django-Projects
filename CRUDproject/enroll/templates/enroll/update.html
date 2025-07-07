@@ -1,0 +1,32 @@
+{% extends "enroll/base.html" %}
+{%block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">Update Student Details</h4>
+        <form action="" method="POST" novalidate>
+            {%csrf_token%}
+               {{form.as_p}} 
+               <div>
+                 <input type="submit" class="btn btn-info" value="Update">
+                 <a href="{% url 'AddandShow' %}" class="btn btn-success">Back To Home</a>
+                 
+                </div>            
+        </form>
+     
+    </div>
+        {% if messages %}
+          {% for message in messages  %}
+          <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+            <div class="col-sm-12 d-flex align-items-center">
+               <span >  
+                <h4 class="text-center alert alert-success" {%if message.tags%} class="{{message.tags}}" {% endif %}>
+                {{message}}
+                </h4>                
+               </span>                    
+            </div>
+          </div>
+          {% endfor %}
+        {% endif %}      
+</div>
+
+{%endblock content%}

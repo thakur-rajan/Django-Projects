@@ -1,0 +1,40 @@
+{% extends "blog/base.html" %}
+{%block msg%}
+    {% if messages %}
+     {% for message in messages  %}
+     <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+       <div class="col-sm-12 d-flex align-items-center">
+
+          <span >  
+           <h4 class="text-center alert alert-light my-4" {%if message.tags%} class="{{message.tags}}" {% endif %}>
+           {{message}}
+           </h4>                
+          </span>                    
+       </div>
+     </div>
+    {%endfor%} 
+    {%endif%} 
+{%endblock msg%}
+{% block content%}
+<div class="col-sm-10">
+    <h3 class="text-black my-4">Login Page</h3>
+    
+    <form action="" method="POST"novalidate>
+        {%csrf_token%}
+        {%if form%}
+         {%for field in form%}
+         <div class="mb-3">
+           {{field.label_tag}} {{field}} <span class="errorlist">{{field.errors|striptags}} </span><br>           
+         </div>
+         {%endfor%}
+        {%endif%}
+        {% if form.non_field_errors %}
+          {%for error in  form.non_field_errors%}
+            <span class="alert alert-danger my-5" > {{error}} </span>
+          {%endfor%}
+        {%endif%}      
+        <input type="submit" class="btn btn-primary w-100 my-5" value="Submit">
+    </form>
+</div>
+
+{%endblock content%}

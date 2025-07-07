@@ -1,0 +1,85 @@
+{% extends "enroll/base.html" %}
+{%block content %}
+<div class="row">
+    <div class="col-sm-3">
+          <h4 class="text-center alert alert-info">Add student </h4>
+        
+         <form action="" method="POST" novalidate>
+             {% csrf_token %}
+                <!-- {{form.non_field_errors}} -->
+              {% for field in form %}
+                <p>
+                 {{field.label_tag}} {{field}}
+        
+                 <span class="errorlist"> {{field.errors|striptags}} </span>
+                </p>
+ 
+              {% endfor %}
+              <input type="submit" class=" btn btn-outline-success" value="          ADD         ">
+          </form>
+         {%if messages %}
+           {% for message in messages %}
+           <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+            <div class="col-sm-12 d-flex align-items-center">
+
+               <span >  
+                <h4 class="alert alert-success" {%if message.tags%} class="{{message.tags}}" {% endif %}>
+                {{message}}
+                </h4>                
+               </span>                    
+            </div>
+          </div>           
+           {% endfor %}
+          
+          {% endif %}  
+    </div>
+   
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-info">STUDENT DETAILS</h4>
+            {% if student %}
+             <table class="table">
+                   <thead>
+                     <tr>
+                         <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                         <th scope="col">DOB</th>
+                         <th scope="col">Address</th>
+                         <th scope="col">Course</th>
+                        <th scope="col">Phone</th>
+                         <th scope="col">Email</th>
+                          <th scope="col">Gender</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+             {% for st in student%} 
+               <tbody>
+                      <tr>
+                         <th scope="row"> {{st.id}} </th>
+                         <td> {{st.name}} </td>
+                         <td> {{st.dob}} </td>
+                         <td> {{st.address}} </td>
+                         <td> {{st.course}} </td>
+                         <td> {{st.phoneNumber}} </td>
+                         <td> {{st.email}} </td>
+                         <td> {{st.gender}} </td>
+                         <td> 
+                          <a href="{% url 'updateData' st.id %}" class="btn btn-outline-warning">Edit</a>
+                         <td>
+                          <form action="{% url 'deleteData' st.id %}" method="POST">
+                              {% csrf_token %}
+
+                             <input type="submit" class="btn btn-outline-danger" value="Delete">
+                          </form>
+                         </td>
+                       </tr>              
+                    </tbody>
+              {% endfor%}
+                </table>          
+            {% else %}
+             <h4 class=" text-center alert alert-danger">NO DATA</h4>
+            {% endif %}
+            
+        </div> 
+</div>
+  
+{%endblock content%}
